@@ -31,7 +31,7 @@ const BlogDetail = ({ blog, preview }) => {
             title={blog.title}
             subtitle={blog.subtitle}
             author={blog.author}
-            date={moment(blog.date).format('LLL')}
+            date={moment(blog.date).format('LL')}
             coverImage={urlFor(blog.coverImage).height(600).url()}
           />
           <hr />
@@ -45,7 +45,8 @@ const BlogDetail = ({ blog, preview }) => {
 export async function getStaticProps({ params, preview = false, previewData }) {
   const blog = await getBlogBySlug(params.slug, preview);
   return {
-    props: { blog, preview }
+    props: { blog, preview },
+    revalidate: 1
   };
 }
 
